@@ -1,35 +1,35 @@
 # Base de datos y GIS
-geopandas==0.13.2
-psycopg2-binary==2.9.9
-SQLAlchemy==2.0.23
-shapely==2.0.2
-pyproj==3.6.1
+geopandas
+psycopg2-binary
+SQLAlchemy
+shapely
+pyproj
 
 # AWS
-boto3==1.29.3
-botocore==1.32.3
-s3fs==2023.10.0
+boto3
+botocore
+s3fs
 
 # Manejo de datos
-pandas==2.1.3
-numpy==1.26.2
-pyarrow==14.0.1
+pandas
+numpy
+pyarrow
 
 # Configuración y logging
-python-dotenv==1.0.0
-loguru==0.7.2
+python-dotenv
+loguru
 
 # Testing
-pytest==7.4.3
-pytest-cov==4.1.0
-mock==5.1.0
+pytest
+pytest-cov
+mock
 
 # Utilidades
-tqdm==4.66.1  # Para barras de progreso
-requests==2.31.0
-pyyaml==6.0.1
+tqdm  # Para barras de progreso
+requests
+pyyaml
 
 # Formateo y linting
-black==23.11.0
-flake8==6.1.0
-isort==5.12.0
+black
+flake8
+isort
