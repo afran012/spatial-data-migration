@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "spatial-data-migration"
+version = "0.1.0"
+description = "Herramienta para migrar datos espaciales de PostgreSQL a Amazon Athena"
+authors = ["Your Name <your.email@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+geopandas = "^0.12.0"
+pandas = "^1.5.0"
+sqlalchemy = "^2.0.0"
+psycopg2-binary = "^2.9.5"
+boto3 = "^1.26.0"
+python-dotenv = "^0.21.0"
+pyarrow = "^11.0.0"
+loguru = "^0.7.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.3.1"
+black = "^23.3.0"
+flake8 = "^6.0.0"
+mypy = "^1.3.0"
+pytest-cov = "^4.0.0"
+pre-commit = "^3.3.1"

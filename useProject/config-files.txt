@@ -1,0 +1,84 @@
+# .env.example
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+POSTGRES_DB=spatial_db
+POSTGRES_USER=your_user
+POSTGRES_PASSWORD=your_password
+
+AWS_ACCESS_KEY_ID=your_access_key
+AWS_SECRET_ACCESS_KEY=your_secret_key
+AWS_REGION=your_region
+S3_BUCKET=your_bucket
+GLUE_DATABASE=your_database
+
+# .gitignore
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+.venv
+env/
+venv/
+ENV/
+dist/
+build/
+*.egg-info/
+.coverage
+htmlcov/
+.pytest_cache/
+.idea/
+.vscode/
+*.log
+*.parquet
+.DS_Store
+
+# pyproject.toml
+[tool.poetry]
+name = "spatial-data-migration"
+version = "0.1.0"
+description = "Herramienta para migrar datos espaciales de PostgreSQL a Amazon Athena"
+authors = ["Your Name <your.email@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+geopandas = "^0.12.0"
+pandas = "^1.5.0"
+sqlalchemy = "^2.0.0"
+psycopg2-binary = "^2.9.5"
+boto3 = "^1.26.0"
+python-dotenv = "^0.21.0"
+pyarrow = "^11.0.0"
+loguru = "^0.7.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.3.1"
+black = "^23.3.0"
+flake8 = "^6.0.0"
+mypy = "^1.3.0"
+pytest-cov = "^4.0.0"
+pre-commit = "^3.3.1"
+
+# Makefile
+.PHONY: install test lint format clean
+
+install:
+	poetry install
+
+test:
+	poetry run pytest tests/ --cov=src/
+
+lint:
+	poetry run flake8 src/ tests/
+	poetry run mypy src/ tests/
+
+format:
+	poetry run black src/ tests/
+
+clean:
+	rm -rf dist/
+	rm -rf build/
+	rm -rf *.egg-info
+	find . -type d -name __pycache__ -exec rm -rf {} +
+	find . -type d -name .pytest_cache -exec rm -rf {} +
+	find . -type d -name .coverage -exec rm -rf {} +

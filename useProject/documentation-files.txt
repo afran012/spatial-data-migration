@@ -1,0 +1,171 @@
+# docs/architecture.md
+# Arquitectura del Sistema
+
+## Visión General
+
+Este documento describe la arquitectura del sistema de migración de datos espaciales, detallando sus componentes principales y sus interacciones.
+
+## Componentes Principales
+
+### 1. Extractor (PostgreSQL)
+- Responsable de la conexión y extracción de datos desde PostgreSQL
+- Maneja la conversión inicial de datos espaciales
+- Implementa paginación para conjuntos de datos grandes
+- Gestiona conexiones y recursos de base de datos
+
+### 2. Transformer
+- Convierte datos espaciales a formato Parquet
+- Optimiza el esquema de datos para consultas analíticas
+- Gestiona la conversión de tipos de datos espaciales
+- Implementa validaciones de datos
+
+### 3. Loader (AWS)
+- Gestiona la carga de datos a S3
+- Configura tablas en AWS Glue
+- Implementa retry logic y manejo de errores
+- Gestiona permisos y configuraciones de AWS
+
+## Flujo de Datos
+
+1. **Extracción**
+   ```
+   PostgreSQL -> Extractor -> GeoDataFrame
+   ```
+
+2. **Transformación**
+   ```
+   GeoDataFrame -> Transformer -> Parquet
+   ```
+
+3. **Carga**
+   ```
+   Parquet -> Loader -> S3 -> Glue -> Athena
+   ```
+
+## Consideraciones Técnicas
+
+### Escalabilidad
+- Procesamiento por lotes para conjuntos grandes
+- Paralelización de operaciones donde sea posible
+- Gestión eficiente de memoria
+
+### Seguridad
+- Cifrado en tránsito y en reposo
+- Gestión segura de credenciales
+- Logs de auditoría
+
+### Monitoreo
+- Logging comprehensivo
+- Métricas de rendimiento
+- Alertas configurables
+
+# docs/deployment.md
+# Guía de Despliegue
+
+## Requisitos Previos
+
+### Software
+- Python 3.9+
+- PostgreSQL con PostGIS
+- AWS CLI configurado
+- Poetry
+
+### Credenciales
+- Acceso a PostgreSQL
+- Credenciales de AWS con permisos para:
+  - S3
+  - Glue
+  - Athena
+
+## Pasos de Instalación
+
+1. **Preparación del Entorno**
+   ```bash
+   git clone https://github.com/your-org/spatial-data-migration
+   cd spatial-data-migration
+   poetry install
+   ```
+
+2. **Configuración**
+   ```bash
+   cp .env.example .env
+   # Editar .env con las credenciales correspondientes
+   ```
+
+3. **Configuración de AWS**
+   ```bash
+   ./scripts/setup_aws.sh
+   ```
+
+4. **Configuración de Base de Datos**
+   ```bash
+   ./scripts/setup_database.sh
+   ```
+
+## Verificación del Despliegue
+
+1. **Pruebas Básicas**
+   ```bash
+   poetry run pytest
+   ```
+
+2. **Migración de Prueba**
+   ```bash
+   poetry run python examples/basic_migration.py
+   ```
+
+# docs/development.md
+# Guía de Desarrollo
+
+## Configuración del Entorno
+
+1. **Clonar Repositorio**
+   ```bash
+   git clone https://github.com/your-org/spatial-data-migration
+   cd spatial-data-migration
+   ```
+
+2. **Instalar Dependencias**
+   ```bash
+   poetry install
+   ```
+
+3. **Configurar Pre-commit**
+   ```bash
+   pre-commit install
+   ```
+
+## Estructura del Proyecto
+
+```
+spatial-data-migration/
+├── src/
+│   └── spatial_migration/
+│       ├── core/          # Componentes principales
+│       ├── utils/         # Utilidades
+│       └── exceptions/    # Excepciones personalizadas
+├── tests/                 # Pruebas unitarias
+└── examples/              # Ejemplos de uso
+```
+
+## Guías de Estilo
+
+- Seguir PEP 8
+- Docstrings en formato Google
+- Type hints para todos los métodos públicos
+- Tests para toda nueva funcionalidad
+
+## Flujo de Trabajo
+
+1. Crear rama feature: `git checkout -b feature/nombre`
+2. Desarrollar y probar
+3. Ejecutar pruebas: `poetry run pytest`
+4. Commit y push
+5. Crear Pull Request
+
+## Mejores Prácticas
+
+- Mantener clases y métodos pequeños y enfocados
+- Escribir tests unitarios
+- Documentar cambios importantes
+- Mantener el changelog actualizado

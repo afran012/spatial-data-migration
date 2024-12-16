@@ -1,0 +1,16 @@
+El backend 
+1. cd backend
+2. python -m venv venv
+3. venv\Scripts\activate.bat (para windows)
+4. pip install requirements.txt
+5. uvicorn main:app --reload
+
+El frontend
+1. cd frontend
+2. npm install
+3. npm start
+
+
+agregar escala de colores al mapa de dash de hurtos de azul calro a rojo
+homicidoios de blanco a rojo 
+agregar el popup 

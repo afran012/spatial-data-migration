@@ -1,0 +1,55 @@
+spatial-data-migration/
+│
+├── .env.example                 # Plantilla para variables de entorno
+├── .gitignore                  # Configuración de archivos ignorados por git
+├── README.md                   # Documentación principal del proyecto
+├── pyproject.toml             # Configuración del proyecto y dependencias (Poetry)
+├── setup.cfg                  # Configuración para herramientas de desarrollo
+├── Makefile                   # Comandos automatizados del proyecto
+│
+├── src/                       # Código fuente principal
+│   └── spatial_migration/
+│       ├── __init__.py
+│       ├── main.py           # Punto de entrada principal
+│       ├── config.py         # Configuración y carga de variables de entorno
+│       ├── logger.py         # Configuración de logging
+│       │
+│       ├── core/            # Lógica principal
+│       │   ├── __init__.py
+│       │   ├── extractor.py  # Extracción de datos de PostgreSQL
+│       │   ├── transformer.py # Transformación de datos espaciales
+│       │   └── loader.py     # Carga a S3 y configuración de Glue
+│       │
+│       ├── models/          # Modelos y schemas
+│       │   ├── __init__.py
+│       │   └── schemas.py   # Definición de modelos de datos
+│       │
+│       ├── utils/           # Utilidades
+│       │   ├── __init__.py
+│       │   ├── aws.py      # Utilidades para AWS
+│       │   ├── db.py       # Utilidades para base de datos
+│       │   └── validators.py # Validaciones
+│       │
+│       └── exceptions/      # Excepciones personalizadas
+│           ├── __init__.py
+│           └── custom_exceptions.py
+│
+├── tests/                    # Pruebas
+│   ├── __init__.py
+│   ├── conftest.py          # Configuración de pruebas
+│   ├── test_extractor.py
+│   ├── test_transformer.py
+│   └── test_loader.py
+│
+├── scripts/                  # Scripts útiles
+│   ├── setup_aws.sh        # Script para configuración de AWS
+│   └── setup_database.sh   # Script para configuración de la base de datos
+│
+├── docs/                    # Documentación
+│   ├── architecture.md     # Documentación de arquitectura
+│   ├── deployment.md       # Guía de despliegue
+│   └── development.md      # Guía de desarrollo
+│
+└── examples/               # Ejemplos de uso
+    ├── basic_migration.py
+    └── advanced_migration.py
