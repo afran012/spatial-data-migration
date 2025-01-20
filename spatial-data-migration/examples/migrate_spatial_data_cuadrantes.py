@@ -87,7 +87,7 @@ def migrate_spatial_data():
         print("Subiendo datos a S3...")
         s3_client = boto3.client('s3')
         s3_bucket = os.getenv('ATHENA_OUTPUT_BUCKET')
-        s3_prefix = f"spatial_data/cuadrantes/{timestamp}"
+        s3_prefix = f"dwh/seguridad/spatial_data/cuadrantes/{timestamp}"
         
         # Guardar temporalmente y subir a S3
         local_path = f"temp_spatial_data_{timestamp}.parquet"
